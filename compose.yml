@@ -1,0 +1,70 @@
+services:
+
+  db:
+    image: postgres:15
+    hostname: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: pguser
+      POSTGRES_PASSWORD: pgpassword
+      PGDATA: /var/lib/postgresql/data
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+      - ./postgres/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+    networks:
+      - private
+
+  db_admin:
+    image: adminer
+    hostname: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    depends_on:
+      - postgres
+    networks:
+      - private
+
+  app:
+    image: ruby
+    hostname: rails
+    build:
+      context: app
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 3000:3000
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - private
+
+  cache:
+    image: redis
+    build:
+      context: cache
+      dockerfile: Dockerfile
+    hostname: redis
+    restart: always
+    ports:
+      - 6379:6379
+    networks:
+      - private
+
+  proxy:
+    image: nginx
+    build:
+      context: proxy
+      dockerfile: Dockerfile
+    restart: always
+    hostname: nginx
+    volumes:
+      # TODO need to share the rails volume, because should serve static content. Or just copy static content into this image
+
+volumes:
+  pg-data:
+
+networks:
+  public:
+  private:

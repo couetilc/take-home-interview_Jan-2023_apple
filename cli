@@ -1,0 +1,9 @@
+rails() {
+
+}
+
+psql() {
+    docker compose exec postgres psql -U pguser
+}
+
+"$@"
