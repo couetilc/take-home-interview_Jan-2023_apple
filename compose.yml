@@ -21,24 +21,27 @@ services:
     ports:
       - 8080:8080
     depends_on:
-      - postgres
+      - db
     networks:
       - private
 
-  app:
+  webapp:
     image: ruby
     hostname: rails
     build:
-      context: app
+      context: webapp
       dockerfile: Dockerfile
     restart: always
     ports:
       - 3000:3000
     depends_on:
-      - postgres
-      - redis
+      - db
+      - cache
     networks:
       - private
+    volumes:
+      - ./webapp:/usr/src/app
+      - bundle-cache:/bundle
 
   cache:
     image: redis
@@ -52,18 +55,21 @@ services:
     networks:
       - private
 
-  proxy:
-    image: nginx
-    build:
-      context: proxy
-      dockerfile: Dockerfile
-    restart: always
-    hostname: nginx
-    volumes:
+#   proxy:
+#     image: nginx
+#     build:
+#       context: proxy
+#       dockerfile: Dockerfile
+#     restart: always
+#     hostname: nginx
+#     depends_on:
+#       - webapp
+    # volumes:
       # TODO need to share the rails volume, because should serve static content. Or just copy static content into this image
 
 volumes:
   pg-data:
+  bundle-cache:
 
 networks:
   public:

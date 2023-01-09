@@ -7,7 +7,8 @@ RUN apt-get update \
 
 WORKDIR /usr/src/app
 COPY Gemfile* ./
-RUN bundle install
+ENV BUNDLE_PATH=/bundle
+RUN bundle install --full-index
 COPY . .
 
 EXPOSE 3000

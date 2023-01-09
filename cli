@@ -1,9 +1,26 @@
-rails() {
+#!/usr/bin/env bash
 
+webapp-run() {
+    docker compose -f compose.yml run webapp "$@"
+}
+
+webapp() {
+    docker compose -f compose.yml exec webapp "$@"
 }
 
 psql() {
-    docker compose exec postgres psql -U pguser
+    docker compose -f compose.yml exec postgres psql -U pguser "$@"
+}
+
+compose() {
+    docker compose -f compose.yml "$@"
+}
+
+ruby() {
+    docker run \
+        --workdir=/usr/src/app \
+        --volume=/$(pwd)/webapp:/usr/src/app \
+        ruby "$@"
 }
 
 "$@"
