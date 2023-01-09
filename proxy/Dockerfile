@@ -1,2 +1,3 @@
-FROM nginx
-COPY nginx.conf /etc/nginx/nginx.conf
+FROM caddy:2
+COPY ./proxy/Caddyfile /etc/caddy/Caddyfile
+COPY ../webapp/public /srv

@@ -12,6 +12,18 @@ psql() {
     docker compose -f compose.yml exec db psql -U pguser "$@"
 }
 
+proxy() {
+    docker compose -f compose.yml exec proxy "$@"
+}
+
+proxy-reload() {
+    docker compose -f compose.yml exec proxy caddy reload --config /etc/caddy/Caddyfile "$@"
+}
+
+proxy-fmt() {
+    docker compose -f compose.yml exec proxy caddy fmt /etc/caddy/Caddyfile "$@"
+}
+
 compose() {
     docker compose -f compose.yml "$@"
 }

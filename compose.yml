@@ -60,21 +60,33 @@ services:
     networks:
       - private
 
-#   proxy:
-#     image: nginx
-#     build:
-#       context: proxy
-#       dockerfile: Dockerfile
-#     restart: always
-#     hostname: nginx
-#     depends_on:
-#       - webapp
-    # volumes:
-      # TODO need to share the rails volume, because should serve static content. Or just copy static content into this image
+  proxy:
+    image: caddy:2
+    build:
+      context: .
+      dockerfile: ./proxy/Dockerfile
+    restart: always
+    hostname: nginx
+    depends_on:
+      - webapp
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - "./proxy/Caddyfile:/etc/caddy/Caddyfile"
+      - "./webapp/public:/srv"
+      - "caddy-data:/data"
+      - "caddy-config:/config"
+    networks:
+      - private
+      - public
 
 volumes:
   pg-data:
   bundle-cache:
+  caddy-data:
+  caddy-config:
 
 networks:
   public:
