@@ -10,9 +10,11 @@ services:
       PGDATA: /var/lib/postgresql/data
     volumes:
       - pg-data:/var/lib/postgresql/data
-      - ./postgres/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+      - ./db/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
     networks:
       - private
+    ports:
+      - 5432:5432
 
   db_admin:
     image: adminer
@@ -26,7 +28,7 @@ services:
       - private
 
   webapp:
-    image: ruby
+    image: ruby:3
     hostname: rails
     build:
       context: webapp
@@ -42,9 +44,12 @@ services:
     volumes:
       - ./webapp:/usr/src/app
       - bundle-cache:/bundle
+    environment:
+      DATABASE_URL: "postgresql://pguser:pgpassword@postgres:5432/app"
+      REDIS_URL: "redis://:redispassword@redis:6379/0"
 
   cache:
-    image: redis
+    image: redis:7
     build:
       context: cache
       dockerfile: Dockerfile

@@ -9,7 +9,7 @@ webapp() {
 }
 
 psql() {
-    docker compose -f compose.yml exec postgres psql -U pguser "$@"
+    docker compose -f compose.yml exec db psql -U pguser "$@"
 }
 
 compose() {
