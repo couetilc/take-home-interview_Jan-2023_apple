@@ -1,0 +1,6 @@
+<h1>Weather Forecast Coding Assignment</h1>
+<%= form_with url: '/forecast', method: :get do |form| %>
+    <%= form.label :zip_code, "Zip Code:" %>
+    <%= form.text_field :zip_code, pattern: "[0-9]{5}" %>
+    <%= form.button(name: nil) do "Get Forecast" end %>
+<% end %>
