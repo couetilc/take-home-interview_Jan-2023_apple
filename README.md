@@ -116,12 +116,12 @@ PostgreSQL database, and Redis instance. I'll proxy requests with Caddy. I will
 store commands for project development and maintenance in an executable file
 "cli" at the root of the repo.
 
-TODO: index page that presents zip code input form to user
-TODO: handle form submission
+TODO: handle form submission and provide weather data
 TODO: handle caching requirement
 TODO: improve error messages for input validation, etc.
 TODO: can I write integration tests that verify the prompt requirements?
 TODO: make everything pretty
+TODO: hackerrank
 
 ## Future Improvements
 
