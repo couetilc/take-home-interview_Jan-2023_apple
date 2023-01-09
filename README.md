@@ -115,8 +115,9 @@ The user will see two pages: the address input page, containing a form with a te
 
 We'll put our infrastructure together using Docker, for ease of use and so our interviewers can quickly get it running locally. We will need a Rails app, a PostgreSQL database, and Redis instance. I'll proxy requests with Nginx. I will store commands for project development and maintenance in an executable file "cli" at the root of the repo.
 
-TODO: test the docker setup
-TODO: initialize the rails application
+TODO: get connection to postgres working, run any migrations
+TODO: get connection to redis working
+TODO: start proxying with nginx
 
 ## Future Improvements
 
