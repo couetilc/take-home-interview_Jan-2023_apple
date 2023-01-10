@@ -1,31 +1,38 @@
 #!/usr/bin/env bash
 
-webapp-run() {
-    docker compose -f compose.yml run webapp "$@"
+COMPOSE_FILE="compose.yml"
+RAILS_URL="http://localhost"
+
+cleanup() {
+    docker compose down
 }
 
-webapp() {
-    docker compose -f compose.yml exec webapp "$@"
+preview() {
+    docker compose up --wait
+    timeout --foreground 10 \
+        bash -c '
+            while [[ "$(curl -s -o /dev/null -L -w ''%{http_code}'' '"${RAILS_URL})"'" != "200" ]];
+            do echo "waiting for rails app" && sleep 1;
+            done
+        '
+    echo 'opening rails app'
+    open "$RAILS_URL"
 }
 
 psql() {
-    docker compose -f compose.yml exec db psql -U pguser "$@"
+    docker compose exec db psql -U pguser "$@"
 }
 
 proxy() {
-    docker compose -f compose.yml exec proxy "$@"
-}
-
-proxy-reload() {
-    docker compose -f compose.yml exec proxy caddy reload --config /etc/caddy/Caddyfile "$@"
+    docker compose exec proxy "$@"
 }
 
 proxy-fmt() {
-    docker compose -f compose.yml exec proxy caddy fmt /etc/caddy/Caddyfile "$@"
+    docker compose exec proxy caddy fmt /etc/caddy/Caddyfile "$@"
 }
 
-compose() {
-    docker compose -f compose.yml "$@"
+proxy-reload() {
+    docker compose exec proxy caddy reload --config /etc/caddy/Caddyfile "$@"
 }
 
 ruby() {
@@ -35,4 +42,21 @@ ruby() {
         ruby "$@"
 }
 
-"$@"
+tests() {
+    docker compose exec webapp rails test
+}
+
+webapp() {
+    docker compose exec webapp "$@"
+}
+
+webapp-run() {
+    docker compose run webapp "$@"
+}
+
+if [ "$@" ]; then
+    "$@"
+else
+    echo "Available commands:"
+    declare -F | sed 's/^declare -f /\t/'
+fi

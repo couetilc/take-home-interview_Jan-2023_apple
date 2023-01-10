@@ -1,5 +1,13 @@
 # Take Home Interview, Jan 2023, Apple
 
+## Try it out
+
+```sh
+git clone git@github.com:couetilc/take-home-interview_Jan-2023_apple.git
+cd take-home-interview_Jan-2023_apple
+./cli preview
+```
+
 ## Plan of Attack
 
 The prompt is clear, the app must use Ruby on Rails and return weather forecast
