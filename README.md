@@ -46,7 +46,7 @@ parameter and specify it to return min and max temperatures for the next week.
 It requires me to specify a timezone though, which I'll get from the geocoding
 API. Caching the API response by zipcode shouldn't be affected by this timezone
 parameter, I believe it's a safe assumption for this project that every zip
-code will have the same timezone. 
+code will have the same timezone.
 
 ```sh
 curl "https://api.open-meteo.com/v1/forecast"\
@@ -124,19 +124,21 @@ PostgreSQL database, and Redis instance. I'll proxy requests with Caddy. I will
 store commands for project development and maintenance in an executable file
 "cli" at the root of the repo.
 
-TODO: handle form submission and provide weather data
-TODO: handle caching requirement
 TODO: improve error messages for input validation, etc.
 TODO: can I write integration tests that verify the prompt requirements?
+TODO: show timezone in the weather page's response
 TODO: make everything pretty
 TODO: hackerrank
 
 ## Future Improvements
 
+- Allow user to specify timezone for forecast
 - Widen input range from just zip code to city names. Autocomplete user input
 and require selecting one option so search text is resolved to one entity.
 - Put API scraping on workers so user is not left hanging until all requests
 resolve, can poll or do websockets until data is available.
+- Load test open-meteo to see if there are any limits to request frequency,
+respect that in rails app
 
 ## Appendix
 

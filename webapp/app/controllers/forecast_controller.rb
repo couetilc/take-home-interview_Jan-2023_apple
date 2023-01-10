@@ -2,6 +2,9 @@ class ForecastController < ApplicationController
   before_action :validate_params
 
   def index
+    forecaster = ForecastService.new(params[:zip_code])
+    @forecast = forecaster.call
+    @is_cached = forecaster.is_cached
   end
 
   private

@@ -1,1 +1,7 @@
-<h1>Weather Forecast for <%= params[:zip_code] %></h1>
+<h1>Weather Forecast for <%= params[:zip_code] %> (Timezone: <%= @forecast["timezone"] %>)</h1>
+
+<p>is cached: <%= @is_cached %></p>
+
+<pre>
+<%= JSON.pretty_generate(@forecast) %>
+</pre>
