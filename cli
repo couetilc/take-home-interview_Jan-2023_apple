@@ -7,6 +7,10 @@ cleanup() {
     docker compose down
 }
 
+logs() {
+    docker compose logs --follow
+}
+
 preview() {
     docker compose up --wait
     timeout --foreground 10 \
@@ -54,7 +58,7 @@ webapp-run() {
     docker compose run webapp "$@"
 }
 
-if [ "$@" ]; then
+if [ $# -gt 0 ]; then
     "$@"
 else
     echo "Available commands:"
