@@ -31,6 +31,15 @@ module ForecastHelper
     @forecast["current_weather"]["winddirection"]
   end
 
+  def current_time
+    Time.parse(@forecast["current_weather"]["time"]).to_formatted_s(:long_ordinal)
+  end
+
+  def cache_status
+    return "Stale" if is_cached
+    "Fresh"
+  end
+
   def pretty_forecast
     JSON.pretty_generate(@forecast)
   end

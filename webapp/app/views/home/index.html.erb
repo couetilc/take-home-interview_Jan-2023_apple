@@ -1,26 +1,11 @@
-<div class="layout-flex-column">
+<main class="layout-flex-column">
 	<div class="sky">
 		<h1 class="home-title titan-one">
 			Forecast it<span class="asterisk">*</span>
 		</h1>
-		<p class="home-subtitle">
+		<i class="home-subtitle">
 			*guaranteed to outperform groundhogs
-		</p>
-		<!--
-		<p class="home-subtitle">
-			*guaranteed to outperform groundhogs - albeit with less panache
-		</p>
-		-->
-		<%# <h1 class="home-header mountains-of-christmas_bold">Forecast it</h1> %>
-
-		<%# <h1 class="home-header black-han-sans">Forecast it</h1> %>
-		<%# <h1 class="home-header paytone-one">Forecast it</h1> %>
-
-
-
-
-
-		<%# <h1 class="home-header angkor">Forecast it</h1> %>
+		</i>
 	</div>
 
 	<svg class="horizon" preserveAspectRatio="none" height="100px" width="100%" viewBox="0 5 10 5" xmlns="http://www.w3.org/2000/svg">
@@ -34,11 +19,11 @@
 
 	<div class="earth">
 
-		<%= form_with url: '/forecast', class: "card card-variant-brown address-form", method: :get do |form| %>
+		<%= form_with url: '/forecast', class: "card variant-brown address-form", method: :get do |form| %>
 				<%= form.label :zip_code do "Enter your zip code" end %>
 				<%= form.text_field :zip_code, required: true, pattern: "[0-9]{5}" %>
 				<%= form.button(name: nil) do "Forecast" end %>
 		<% end %>
 
 	</div>
-</div>
+</main>

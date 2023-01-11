@@ -1,3 +1,46 @@
+<main class="layout-forecast serif">
+
+<article class="card variant-green weather-current">
+	<h1>
+		Today's <br /> Weather
+	</h1>
+	<section class="temperatures">
+		<div class="temperature-current">
+			<span>Temp (°F)</span>
+			<%= current_temp %>°
+		</div>
+		<div class="temperature-max">
+			<span>High</span>
+			<%= current_temp_max %>°
+		</div>
+		<div class="temperature-min">
+			<span>Low</span>
+			<%= current_temp_min %>°
+		</div>
+	</section>
+</article>
+
+<article class="card variant-green weather-metadata">
+	<div class="metadata-item item-zip">
+		<span>Zip Code</span>
+		<%= zip_code %>
+	</div>
+	<div class="metadata-item item-tz">
+		<span>Timezone</span>
+		<%= timezone %>
+	</div>
+	<div class="metadata-item item-time">
+		<span>Updated at</span>
+		<%= current_time %>
+	</div>
+	<div class="metadata-item item-cache">
+		<span>API Cache Status</span>
+		<%= cache_status %>
+	</div>
+</article>
+
+</main>
+
 <h1>
 	Weather Forecast for <%= zip_code %> (Timezone: <%= timezone %>)
 </h1>
