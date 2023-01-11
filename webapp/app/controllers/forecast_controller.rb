@@ -10,7 +10,7 @@ class ForecastController < ApplicationController
   private
 
   def validate_params
-    if !/[0-9]{5}/.match(params[:zip_code])
+    if !/^[0-9]{5}$/.match(params[:zip_code])
       flash[:error] = "You must provide a valid zip code"
       redirect_to :root
     end

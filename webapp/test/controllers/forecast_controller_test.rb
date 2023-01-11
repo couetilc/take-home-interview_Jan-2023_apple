@@ -9,5 +9,12 @@ class ForecastControllerTest < ActionDispatch::IntegrationTest
   test "should return to home page with improper zip code" do
     get forecast_url
     assert_redirected_to controller: 'home', action: 'index'
+
+    get forecast_url, params: { zip_code: '1234' }
+    assert_redirected_to controller: 'home', action: 'index'
+
+    get forecast_url, params: { zip_code: '123456' }
+    assert_redirected_to controller: 'home', action: 'index'
   end
+
 end

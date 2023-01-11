@@ -26,6 +26,9 @@
 	--light-french-beige: #C8AB83;
 	--gold-crayola: #eec584;
 
+	--color_error-border: #ff0000;
+	--color_error-background: #db5454;
+
 	--proportion_scale: 100;
 	--proportion_sky: 33;
 	--proportion_earth: calc(var(--proportion_scale) - var(--proportion_sky));
@@ -40,6 +43,31 @@
 
 	--color_sky: var(--wu-blue);
 	--color_earth: var(--wu-green);
+}
+
+.flashes {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	margin: 1rem;
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+	justify-content: flex-start;
+	gap: .5rem;
+}
+
+.flash {
+	border-radius: 6px;
+	padding: .625rem 1rem;
+}
+
+.flash-error {
+	border: 2px solid var(--color_error-border);
+	background: var(--color_error-background);
+	border-radius: 6px;
+	color: white;
 }
 
 .layout-flex-column {

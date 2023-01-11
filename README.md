@@ -1,5 +1,7 @@
 # Take Home Interview, Jan 2023, Apple
 
+![forecast it](https://imgur.com/a/T8aif6N)
+
 ## Try it out
 
 ```sh
