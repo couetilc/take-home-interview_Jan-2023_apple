@@ -45,7 +45,9 @@ class ForecastService
           "longitude=#{location["longitude"]}",
           "current_weather=true",
           "daily=temperature_2m_min",
-          "daily=temperature_2m_max"
+          "daily=temperature_2m_max",
+          "hourly=temperature_2m",
+          "temperature_unit=fahrenheit",
         ].join('&')
       })
 

@@ -1,7 +1,37 @@
-<h1>Weather Forecast for <%= params[:zip_code] %> (Timezone: <%= @forecast["timezone"] %>)</h1>
+<h1>
+	Weather Forecast for <%= zip_code %> (Timezone: <%= timezone %>)
+</h1>
 
-<p>is cached: <%= @is_cached %></p>
+<p>
+	is cached: <%= @is_cached %>
+</p>
+
+<h2>
+	Current Weather
+</h2>
+<p>
+	temperature (hi/low): <%= current_temp %>
+	(<%= current_temp_max %>/<%= current_temp_min %>)
+</p>
+<p>
+	windspeed: <%= windspeed %>
+</p>
+<p>
+	wind direction: <%= wind_direction %>
+</p>
+
+<h2>
+	Extended Forecast
+</h2>
 
 <pre>
-<%= JSON.pretty_generate(@forecast) %>
+<%= pretty_forecast %>
 </pre>
+
+<details>
+	<summary>Please Note:</summary>
+	<ul>
+		<li>Temperature is in Fahrenheit. Sorry Celsius fans.</li>
+		<li>All times are in the weather forecast's timezone.</li>
+	</ul>
+</details>

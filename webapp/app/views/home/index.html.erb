@@ -1,6 +1,42 @@
-<h1>Weather Forecast Coding Assignment</h1>
-<%= form_with url: '/forecast', method: :get do |form| %>
-    <%= form.label :zip_code, "Zip Code:" %>
-    <%= form.text_field :zip_code, pattern: "[0-9]{5}" %>
-    <%= form.button(name: nil) do "Get Forecast" end %>
-<% end %>
+<div class="layout-flex-column">
+	<div class="sky">
+		<h1 class="home-title titan-one">
+			Forecast it<span class="asterisk">*</span>
+		</h1>
+		<p class="home-subtitle">
+			*guaranteed to outperform groundhogs
+		</p>
+		<!--
+		<p class="home-subtitle">
+			*guaranteed to outperform groundhogs - albeit with less panache
+		</p>
+		-->
+		<%# <h1 class="home-header mountains-of-christmas_bold">Forecast it</h1> %>
+
+		<%# <h1 class="home-header black-han-sans">Forecast it</h1> %>
+		<%# <h1 class="home-header paytone-one">Forecast it</h1> %>
+
+
+
+
+
+		<%# <h1 class="home-header angkor">Forecast it</h1> %>
+	</div>
+
+	<svg class="horizon" preserveAspectRatio="none" height="100px" width="100%" viewBox="0 5 10 5" xmlns="http://www.w3.org/2000/svg">
+		<path
+			d="
+				M 0,10
+				Q 5,0,10,10
+			"
+		/>
+	</svg>
+
+	<div class="earth">
+		<%= form_with url: '/forecast', method: :get do |form| %>
+				<%= form.label :zip_code, class: "font-3" do "Enter your zip code" end %>
+				<%= form.text_field :zip_code, required: true, pattern: "[0-9]{5}" %>
+				<%= form.button(name: nil, class: "font-3") do "Forecast" end %>
+		<% end %>
+	</div>
+</div>

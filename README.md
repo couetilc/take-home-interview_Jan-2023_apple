@@ -119,7 +119,7 @@ information in a simple stacked layout that provides a link back to the address
 input page and indicates whether the forecast is cached.
 
 We'll put our infrastructure together using Docker, for ease of use and so our
-interviewers can quickly get it running locally. We will need a Rails app, a
+interviewers can quickly get it running locally. We will use a Rails app, a
 PostgreSQL database, and Redis instance. I'll proxy requests with Caddy. I will
 store commands for project development and maintenance in an executable file
 "cli" at the root of the repo.
