@@ -33,10 +33,12 @@
 	</svg>
 
 	<div class="earth">
-		<%= form_with url: '/forecast', method: :get do |form| %>
-				<%= form.label :zip_code, class: "font-3" do "Enter your zip code" end %>
+
+		<%= form_with url: '/forecast', class: "card card-variant-brown address-form", method: :get do |form| %>
+				<%= form.label :zip_code do "Enter your zip code" end %>
 				<%= form.text_field :zip_code, required: true, pattern: "[0-9]{5}" %>
-				<%= form.button(name: nil, class: "font-3") do "Forecast" end %>
+				<%= form.button(name: nil) do "Forecast" end %>
 		<% end %>
+
 	</div>
 </div>
