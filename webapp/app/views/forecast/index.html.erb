@@ -82,11 +82,11 @@
 							<% hourly_cursor = day_offset * 24 + period_index * 6 + hour_offset %>
 							<td
 								data-moment="<%=
-									moment = ActiveSupport::TimeZone.new(current_timezone).parse(hourly_time[hourly_cursor], Time.current)
+									moment = ActiveSupport::TimeZone.new(current_timezone).parse(hourly_time[hourly_cursor])
 									now = Time.current
-									if moment < now
+									if now < moment
 										"past"
-									elsif moment < (now + 1.hour)
+									elsif now < (moment + 1.hour)
 										"present"
 									else
 										"future"
