@@ -58,6 +58,7 @@
 	flex-flow: row wrap;
 	align-items: flex-start;
 	gap: 1rem;
+
 }
 
 .layout-forecast .card {
@@ -121,6 +122,21 @@
 	grid-area: low;
 }
 
+header {
+	position: absolute;
+}
+
+header nav {
+	padding: .5rem 2rem;
+	font-family: "Titan One";
+}
+
+header nav a {
+	color: black;
+	text-decoration: none;
+	appearance: none;
+}
+
 .weather-metadata {
 	display: grid;
 	grid-template:
@@ -160,6 +176,55 @@
 }
 .metadata-item.item-cache {
 	grid-area: cache;
+}
+
+.weather-extended {
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+	gap: 1rem;
+}
+
+.weather-extended table {
+}
+
+.forecast-day td, .forecast-day th {
+	padding: .325rem;
+}
+
+.forecast-day td {
+	text-align: center;
+	vertical-align: middle;
+}
+
+.forecast-day th[scope="row"] {
+	text-align: center;
+	vertical-align: middle;
+	font-size: .625rem;
+}
+
+.forecast-day:not([data-day="0"]) th[scope="row"] .period-label {
+	display: none;
+}
+
+.forecast-day th[scope="col"] {
+	text-align: center;
+	vertical-align: bottom;
+	font-size: .625rem;
+}
+
+.forecast-day td[data-moment="present"] {
+	background: lightgreen;
+	position: relative;
+}
+
+.forecast-day td[data-moment="present"]::before {
+	content: "NOW";
+	font-size: .5rem;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: .125em;
 }
 
 html {

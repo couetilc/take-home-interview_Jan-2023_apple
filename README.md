@@ -124,7 +124,6 @@ PostgreSQL database, and Redis instance. I'll proxy requests with Caddy. I will
 store commands for project development and maintenance in an executable file
 "cli" at the root of the repo.
 
-TODO: style the forecast page
 TODO: improve error messages for input validation, etc.
 TODO: can I write integration tests that verify the prompt requirements?
 TODO: make everything pretty

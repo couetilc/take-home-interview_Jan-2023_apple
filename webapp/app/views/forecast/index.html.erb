@@ -1,3 +1,7 @@
+<header>
+	<nav><a href="/">Forecast it</a></nav>
+</header>
+
 <main class="layout-forecast serif">
 
 <article class="card variant-green weather-current">
@@ -27,54 +31,77 @@
 	</div>
 	<div class="metadata-item item-tz">
 		<span>Timezone</span>
-		<%= timezone %>
+		<%= current_timezone %>
 	</div>
 	<div class="metadata-item item-time">
 		<span>Updated at</span>
 		<%= current_time %>
 	</div>
 	<div class="metadata-item item-cache">
-		<span>API Cache Status</span>
+		<span>Cache Status</span>
 		<%= cache_status %>
 	</div>
 </article>
 
+<article class="card variant-green weather-extended">
+	<h2>Extended Forecast</h2>
+
+	<% Time.use_zone(current_timezone) do %>
+
+	<% (0...7).each do |day_offset| %>
+		<table class="forecast-day" data-day="<%= day_offset %>">
+			<caption>Day <%= day_offset + 1 %></caption>
+			<thead>
+				<tr>
+					<th scope="col">
+					</th>
+					<% (0...6).each do |hour_offset| %>
+						<th scope="col">
+							+<%= hour_offset %>
+						</th>
+					<% end %>
+				</tr>
+			</thead>
+			<tbody>
+				<% [
+						["Night", "00:00"],
+						["Morning", "06:00"],
+						["Afternoon", "12:00"],
+						["Evening", "18:00"],
+					].each_with_index do |day_period, period_index| %>
+					<tr>
+						<th scope="row">
+							<span class="period-label">
+							<%= day_period[0] %>
+							</span>
+							<span class="period-offset">
+							+<%= day_period[1] %>
+							</span>
+						</th>
+						<% (0...6).each do |hour_offset| %>
+							<% hourly_cursor = day_offset * 24 + period_index * 6 + hour_offset %>
+							<td
+								data-moment="<%=
+									moment = ActiveSupport::TimeZone.new(current_timezone).parse(hourly_time[hourly_cursor], Time.current)
+									now = Time.current
+									if moment < now
+										"past"
+									elsif moment < (now + 1.hour)
+										"present"
+									else
+										"future"
+									end
+								%>"
+							>
+								<%= hourly_temperature[hourly_cursor] %>°
+							</td>
+						<% end %>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	<% end %>
+	<% end %>
+</article>
+
 </main>
-
-<h1>
-	Weather Forecast for <%= zip_code %> (Timezone: <%= timezone %>)
-</h1>
-
-<p>
-	is cached: <%= @is_cached %>
-</p>
-
-<h2>
-	Current Weather
-</h2>
-<p>
-	temperature (hi/low): <%= current_temp %>
-	(<%= current_temp_max %>/<%= current_temp_min %>)
-</p>
-<p>
-	windspeed: <%= windspeed %>
-</p>
-<p>
-	wind direction: <%= wind_direction %>
-</p>
-
-<h2>
-	Extended Forecast
-</h2>
-
-<pre>
-<%= pretty_forecast %>
-</pre>
-
-<details>
-	<summary>Please Note:</summary>
-	<ul>
-		<li>Temperature is in Fahrenheit. Sorry Celsius fans.</li>
-		<li>All times are in the weather forecast's timezone.</li>
-	</ul>
-</details>

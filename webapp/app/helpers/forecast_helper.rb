@@ -3,7 +3,7 @@ module ForecastHelper
     params[:zip_code]
   end
 
-  def timezone
+  def current_timezone
     @forecast["timezone"]
   end
 
@@ -36,8 +36,16 @@ module ForecastHelper
   end
 
   def cache_status
-    return "Stale" if is_cached
-    "Fresh"
+    return "Hit" if is_cached
+    "Miss"
+  end
+
+  def hourly_time
+    @forecast["hourly"]["time"]
+  end
+
+  def hourly_temperature
+    @forecast["hourly"]["temperature_2m"]
   end
 
   def pretty_forecast
