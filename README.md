@@ -1,6 +1,6 @@
 # Take Home Interview, Jan 2023, Apple
 
-![forecast it](https://imgur.com/a/T8aif6N)
+![forecast it](https://i.imgur.com/L5ojvWE.png)
 
 ## Try it out
 
