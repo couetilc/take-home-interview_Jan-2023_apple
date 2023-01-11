@@ -129,6 +129,7 @@ store commands for project development and maintenance in an executable file
 ## Future Improvements
 
 - Allow user to specify timezone for forecast
+- Error flow when zip code is not found by open meteo.
 - Widen input range from just zip code to city names. Autocomplete user input
 and require selecting one option so search text is resolved to one entity.
 - Put API scraping on workers so user is not left hanging until all requests
