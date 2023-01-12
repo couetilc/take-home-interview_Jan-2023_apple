@@ -137,6 +137,50 @@ resolve, can poll or do websockets until data is available.
 - Load test open-meteo to see if there are any limits to request frequency,
 respect that in rails app
 
+## Errors
+
+### Bundle install error
+
+Error Message:
+
+```
+#0 8.460 Fetching redis-client 0.12.0
+#0 8.569 Installing redis-client 0.12.0
+#0 52.58 Downloading debug-1.7.1 revealed dependencies not in the API or the lockfile
+#0 52.58 (irb (>= 1.5.0), reline (>= 0.3.1)).
+#0 52.58 Either installing with `--full-index` or running `bundle update debug` should
+#0 52.58 fix the problem.
+------
+failed to solve: executor failed running [/bin/sh -c bundle]: exit code: 34
+```
+
+This was fixed by running `bundle` inside the webapp container like so:
+
+```
+./cli webapp-run bundle update debug
+```
+
+### Run failure when `docker compose up`
+
+Error message:
+
+```
+Error response from daemon: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: exec: "rails": executable file not found in $PATH: unknown
+```
+
+One solution is to change the docker entrypoint to explicitly target the rails
+executable in the folder:
+
+```
+CMD ["./bin/rails", "server", "-b", "0.0.0.0"]
+```
+
+It's easier to update the path variable to include the application's bin folder
+
+```
+ENV PATH="${PATH}:/usr/src/app/bin"
+```
+
 ## Appendix
 
 ### A) Response from forecast
