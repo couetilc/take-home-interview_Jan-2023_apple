@@ -13,12 +13,9 @@ logs() {
 
 preview() {
     docker compose up --wait
-    timeout --foreground 10 \
-        bash -c '
-            while [[ "$(curl -s -o /dev/null -L -w ''%{http_code}'' '"${RAILS_URL})"'" != "200" ]];
-            do echo "waiting for rails app" && sleep 1;
-            done
-        '
+    while [[ "$(curl -s -o /dev/null -L -w '%{http_code}' ${RAILS_URL})" != "200" ]];
+    do echo "waiting for rails app" && sleep 1;
+    done
     echo 'opening rails app'
     open "$RAILS_URL"
 }
